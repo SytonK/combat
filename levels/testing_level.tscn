@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2a5ohk4b32vb"]
+
+[ext_resource type="Script" path="res://levels/testing_level.gd" id="1_bggji"]
+[ext_resource type="Script" path="res://hitbox and hurtbox/hitbox/hitbox.gd" id="1_u3wvm"]
+[ext_resource type="Script" path="res://hitbox and hurtbox/hurtbox/hurtbox.gd" id="2_dnq6a"]
+[ext_resource type="Script" path="res://resources/attack.gd" id="3_u3016"]
+
+[sub_resource type="Resource" id="Resource_urrhn"]
+script = ExtResource("3_u3016")
+damage = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_546i7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5e2xh"]
+
+[node name="TestingLevel" type="Node2D"]
+script = ExtResource("1_bggji")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(429, 303)
+script = ExtResource("1_u3wvm")
+attack = SubResource("Resource_urrhn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_546i7")
+
+[node name="hurtbox" type="Area2D" parent="."]
+position = Vector2(533, 305)
+script = ExtResource("2_dnq6a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource("RectangleShape2D_5e2xh")
+
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
+[connection signal="hurt" from="hurtbox" to="." method="_on_hurtbox_hurt"]
