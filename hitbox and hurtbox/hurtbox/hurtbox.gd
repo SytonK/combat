@@ -3,6 +3,7 @@ extends Area2D
 
 
 signal hurt(attack: Attack)
+@export var is_blocking: bool = false
 
 
 func _init() -> void:
@@ -14,4 +15,7 @@ func _init() -> void:
 func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox:
 		hurt.emit(hitbox.attack)
-		hitbox.hit.emit(hitbox.attack)
+		if is_blocking:
+			hitbox.on_blocked()
+		else:
+			hitbox.on_hit()

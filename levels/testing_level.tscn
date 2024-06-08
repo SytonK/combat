@@ -24,12 +24,29 @@ attack = SubResource("Resource_urrhn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_546i7")
 
-[node name="hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
 position = Vector2(533, 305)
 script = ExtResource("2_dnq6a")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_5e2xh")
+
+[node name="BlockedHitbox" type="Area2D" parent="."]
+position = Vector2(364, 388)
+script = ExtResource("1_u3wvm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockedHitbox"]
+shape = SubResource("RectangleShape2D_546i7")
+
+[node name="BlockedHurtbox" type="Area2D" parent="."]
+position = Vector2(577, 388)
+script = ExtResource("2_dnq6a")
+is_blocking = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockedHurtbox"]
 shape = SubResource("RectangleShape2D_5e2xh")
 
 [connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
-[connection signal="hurt" from="hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="blocked" from="BlockedHitbox" to="." method="_on_blocked_hitbox_blocked"]
+[connection signal="hurt" from="BlockedHurtbox" to="." method="_on_blocked_hurtbox_hurt"]
