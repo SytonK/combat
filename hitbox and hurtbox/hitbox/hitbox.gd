@@ -10,7 +10,6 @@ signal blocked(attack: Attack)
 
 
 func _init() -> void:
-	collision_layer = Layers.HITBOX_LAYER
 	collision_mask = 0
  
 func on_hit() -> void:
