@@ -2,10 +2,9 @@ class_name Hurtbox
 extends Area2D 
 
 
-signal hurt(attack: Attack)
+signal hurt(attack: Attack, defense: Defense)
 
-
-@export var is_blocking: bool = false
+@export var defense: Defense
 
 
 func _init() -> void:
@@ -15,8 +14,6 @@ func _init() -> void:
 
 func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox:
-		hurt.emit(hitbox.attack)
-		if is_blocking:
-			hitbox.on_blocked()
-		else:
-			hitbox.on_hit()
+		hurt.emit(hitbox.attack, defense)
+		
+		hitbox.on_hit(defense)

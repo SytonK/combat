@@ -1,23 +1,16 @@
 extends Node2D
 
 @onready var hitbox: Hitbox = $Hitbox
-@onready var blocked_hitbox: Hitbox = $BlockedHitbox
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	hitbox.position.x += 100 * delta
-	blocked_hitbox.position.x += 100 * delta
 
 
-func _on_hitbox_hit(attack: Attack) -> void:
-	print('hitbox hit ', attack.damage)
+func _on_hitbox_hit(attack: Attack, defense: Defense) -> void:
+	print('hitbox attack:', attack.damage)
+	print('hitbox defense:', defense.defense)
 
 
-func _on_hurtbox_hurt(attack: Attack) -> void:
-	print('hurtbox hurt ', attack.damage)
-
-
-func _on_blocked_hitbox_blocked(_attack: Attack) -> void:
-	print('blocked hitbox')
-
-func _on_blocked_hurtbox_hurt(_attack: Attack) -> void:
-	print('blocked hurtbox')
+func _on_hurtbox_hurt(attack: Attack, defense: Defense) -> void:
+	print('hurtbox attack:', attack.damage)
+	print('hurtbox defense:', defense.defense)
